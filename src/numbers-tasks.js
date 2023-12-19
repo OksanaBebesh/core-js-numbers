@@ -253,8 +253,8 @@ function toNumber(value, def) {
  *   -2 => -8
  *   0  => 0
  */
-function getCube(/* num */) {
-  throw new Error('Not implemented');
+function getCube(num) {
+  return num ** 3;
 }
 
 /**
@@ -285,8 +285,10 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  return Array.from({ length: n + 1 }, (_, i) => i).reduce(
+    (acum, item) => acum + item
+  );
 }
 
 /**
@@ -300,8 +302,11 @@ function getSumToN(/* n */) {
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  return num
+    .toString()
+    .split('')
+    .reduce((acum, item) => Number(acum) + Number(item));
 }
 
 /**
@@ -315,8 +320,18 @@ function getSumOfDigits(/* num */) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  let isPower = true;
+  let check = num;
+  while (check > 1) {
+    if (check % 2 === 0) {
+      check /= 2;
+    } else {
+      isPower = false;
+      break;
+    }
+  }
+  return isPower;
 }
 
 /**
@@ -329,8 +344,8 @@ function isPowerOfTwo(/* num */) {
  *   0 => 0
  *   Math.PI / 2 => 1
  */
-function getSine(/* num */) {
-  throw new Error('Not implemented');
+function getSine(num) {
+  return Math.sin(num).toFixed(0);
 }
 
 /**
@@ -344,8 +359,8 @@ function getSine(/* num */) {
  * 255, 16 => 'ff'
  * 2, 2    => '10'
  */
-function numberToStringInBase(/* number, base */) {
-  throw new Error('Not implemented');
+function numberToStringInBase(number, base) {
+  return number.toString(base);
 }
 
 /**
@@ -437,8 +452,17 @@ function isNumber(/* number */) {
  * 5.1  => false
  * '5'  => false
  */
-function isInteger(/* number */) {
-  throw new Error('Not implemented');
+function isInteger(number) {
+  const checkFloat = number
+    .toString()
+    .split('')
+    .some((item) => item.includes('.'));
+  if (!checkFloat) {
+    return typeof number === 'number';
+  }
+  return false;
+
+  // return typeof number === 'number' && Number.parseInt(number, 10) === number;
 }
 
 /**
@@ -451,8 +475,11 @@ function isInteger(/* number */) {
  * '4.567abcdefgh' => 4.567
  * 'abcdefgh'      => NaN
  */
-function getFloatOnString(/* str */) {
-  throw new Error('Not implemented');
+function getFloatOnString(str) {
+  return Number.parseFloat(str, 10);
+  // const pattern = /[0-9]{0,10}.[0-9]{0,10}/;
+  // const result = +str.match(pattern).toString();
+  // return result;
 }
 
 /**
@@ -469,8 +496,8 @@ function getFloatOnString(/* str */) {
  * '1.234', 2           => 1
  * '10', 8              => 8
  */
-function getIntegerOnString(/* str, base */) {
-  throw new Error('Not implemented');
+function getIntegerOnString(str, base) {
+  return Number.parseInt(str, base);
 }
 
 /**
@@ -542,8 +569,8 @@ function roundToNearestInteger(/* number */) {
  * 5.4  => 5
  * -5.5 => -5
  */
-function getIntegerPartNumber(/* number */) {
-  throw new Error('Not implemented');
+function getIntegerPartNumber(number) {
+  return Math.trunc(number);
 }
 
 /**
